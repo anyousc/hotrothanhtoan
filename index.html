@@ -13,122 +13,153 @@
         }
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            background: linear-gradient(135deg, #ffffff, #f8f5f2, #fff0e6);
+            overflow: hidden;
+            position: relative;
             display: grid;
             place-items: center;
         }
+        /* Vệt quang phổ trắng + cam nhẹ bay lả lơi */
+        .particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .particle {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #ffffff, #ffe0cc, #ff9d5c, #ffffff);
+            border-radius: 50% 0 50% 0;
+            box-shadow: 0 0 18px rgba(255, 140, 0, 0.4), 0 0 35px rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            transform: rotate(30deg);
+            animation: spectrumFloat linear infinite;
+        }
+        @keyframes spectrumFloat {
+            0% { transform: translateY(110vh) rotate(30deg) scale(0.4); opacity: 0; }
+            20% { opacity: 0.75; }
+            60% { opacity: 0.9; transform: translateY(-20vh) rotate(30deg) scale(1.15); }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-130vh) rotate(30deg) scale(0.3); opacity: 0; }
+        }
         .container {
             position: relative;
-            background: rgba(255,255,255, 0.93);
-            backdrop-filter: blur(14px);
-            border-radius: 20px;
-            max-width: 320px;
-            width: 90%;
-            padding: 50px 30px 60px;
-            box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(18px);
+            border-radius: 30px;
+            max-width: 380px;
+            width: 92%;
+            padding: 50px 30px 70px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12), inset 0 0 40px rgba(255, 200, 120, 0.15);
             text-align: center;
             opacity: 0;
-            transform: scale(0.82);
-            animation: appear 1.1s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
-            transition: opacity 1s ease-out, transform 1s ease-out;
+            transform: scale(0.9);
+            animation: appear 1.4s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+            z-index: 10;
+            border: 1px solid rgba(255, 180, 100, 0.25);
         }
         @keyframes appear {
             to { opacity: 1; transform: scale(1); }
         }
+        /* Vòng tròn loading mới - circular spinner */
         .loader {
             position: relative;
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 28px;
-            border-radius: 50%;
-            overflow: hidden;
-            background: #222;
-        }
-        .spinner {
-            position: absolute;
-            inset: 0;
-            border: 5px solid #e0e0e0;
-            border-top: 5px solid #444;
-            border-radius: 50%;
-            animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 40px;
         }
         .video-overlay {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;           /* crop để vừa khung tròn */
-            /* object-fit: contain; */   /* nếu muốn hiện nguyên toàn bộ video, bỏ comment dòng này */
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 160, 80, 0.4);
+        }
+        .spinner {
+            position: absolute;
+            inset: 0;
+            border: 8px solid rgba(255, 255, 255, 0.2);
+            border-top: 8px solid #ff9d5c;
+            border-right: 8px solid #ff8c00;
+            border-bottom: 8px solid #ffe0cc;
+            border-radius: 50%;
+            animation: spin 1.2s linear infinite;
+            box-shadow: 0 0 25px rgba(255, 140, 0, 0.5);
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         .title {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: #111;
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            color: #222;
+            text-shadow: 0 0 15px rgba(255, 160, 80, 0.4);
             text-transform: uppercase;
-            margin: 20px 0 35px;
+            margin: 30px 0 45px;
         }
         .redirect-area {
-            margin: 25px 0;
+            margin: 35px 0;
             opacity: 0;
-            transition: opacity 0.8s ease;
+            transition: opacity 1s ease;
         }
-        .redirect-area.show {
-            opacity: 1;
-        }
+        .redirect-area.show { opacity: 1; }
         .btn-redirect {
             display: inline-block;
-            padding: 14px 40px;
-            font-size: 17px;
-            font-weight: 700;
-            color: #ffffff;
-            background: #111111;
-            border: 1px solid #333;
+            padding: 16px 55px;
+            font-size: 19px;
+            font-weight: 900;
+            color: #111;
+            background: linear-gradient(90deg, #fff, #ffe8d1, #ffd9b3);
+            border: 1px solid #ffcc99;
             border-radius: 50px;
             text-decoration: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 160, 80, 0.3);
+            transition: all 0.4s ease;
             opacity: 0;
-            transform: translateY(15px);
+            transform: translateY(25px);
         }
         .btn-redirect.show {
             opacity: 1;
             transform: translateY(0);
         }
         .btn-redirect:hover {
-            background: #222222;
-            border-color: #555;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+            transform: translateY(-6px) scale(1.06);
+            box-shadow: 0 15px 45px rgba(255, 140, 0, 0.45);
+            background: linear-gradient(90deg, #ffe8d1, #ffcc99, #ffe8d1);
         }
         .footer {
-            margin-top: 40px;
-            font-size: 13px;
+            margin-top: 50px;
+            font-size: 14px;
             color: #555;
-            line-height: 1.4;
         }
         .footer a {
-            color: #001f3f;
-            font-weight: 600;
+            color: #e07a00;
+            font-weight: 700;
             text-decoration: none;
         }
         .footer a:hover {
             text-decoration: underline;
+            color: #ff8c00;
         }
     </style>
 </head>
 <body>
+
+<!-- Vệt quang phổ trắng + cam -->
+<div class="particles" id="particles"></div>
+
 <div class="container" id="main">
     <div class="loader">
-        <!-- Video thay cho chữ 18+ -->
+        <!-- Video làm nền vòng tròn -->
         <video class="video-overlay" autoplay loop muted playsinline>
             <source src="avtbot.mp4" type="video/mp4">
             Trình duyệt của bạn không hỗ trợ video.
         </video>
+        <!-- Vòng tròn loading overlay -->
         <div class="spinner"></div>
     </div>
   
@@ -144,40 +175,56 @@
     </div>
 </div>
 
-<!-- Phần script giữ nguyên -->
 <script>
-    const destinations = [
-        { url: "https://t.me/hackcamlensr", weight: 100 },
-        { url: "https://t.me/+v8MyLMmUvVdjMzM9", weight: 0 }
-    ];
-    function getRandomDestination() {
-        let total = destinations.reduce((sum, item) => sum + item.weight, 0);
-        let rand = Math.random() * total;
-        for (const item of destinations) {
-            if (rand < item.weight) return item.url;
-            rand -= item.weight;
-        }
-        return destinations[0].url;
+// Tạo vệt quang phổ trắng cam
+function createParticle() {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    const size = Math.random() * 70 + 35;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size / 3.5}px`;
+    particle.style.left = `${Math.random() * 100}vw`;
+    particle.style.animationDuration = `${Math.random() * 14 + 11}s`;
+    particle.style.animationDelay = `${Math.random() * 9}s`;
+    
+    document.getElementById('particles').appendChild(particle);
+    setTimeout(() => particle.remove(), 28000);
+}
+setInterval(createParticle, 550);
+
+// Script redirect (giữ nguyên)
+const destinations = [
+    { url: "https://t.me/hackcamlensr", weight: 100 },
+    { url: "https://t.me/+v8MyLMmUvVdjMzM9", weight: 0 }
+];
+function getRandomDestination() {
+    let total = destinations.reduce((sum, item) => sum + item.weight, 0);
+    let rand = Math.random() * total;
+    for (const item of destinations) {
+        if (rand < item.weight) return item.url;
+        rand -= item.weight;
     }
-    const DELAY = 0;
-    const redirectArea = document.getElementById('redirectArea');
-    const redirectBtn = document.getElementById('redirectBtn');
-    const main = document.getElementById('main');
-    const targetUrl = getRandomDestination();
+    return destinations[0].url;
+}
+const DELAY = 0;
+const redirectArea = document.getElementById('redirectArea');
+const redirectBtn = document.getElementById('redirectBtn');
+const main = document.getElementById('main');
+const targetUrl = getRandomDestination();
+setTimeout(() => {
+    redirectBtn.href = targetUrl;
+    redirectArea.classList.add('show');
     setTimeout(() => {
-        redirectBtn.href = targetUrl;
-       
-        redirectArea.classList.add('show');
+        redirectBtn.classList.add('show');
+    }, 100);
+    setTimeout(() => {
+        main.classList.add('exit');
         setTimeout(() => {
-            redirectBtn.classList.add('show');
-        }, 100);
-        setTimeout(() => {
-            main.classList.add('exit');
-            setTimeout(() => {
-                window.location.href = targetUrl;
-            }, 800);
-        }, 1500);
-    }, DELAY);
+            window.location.href = targetUrl;
+        }, 800);
+    }, 2200);
+}, DELAY);
 </script>
 </body>
 </html>
