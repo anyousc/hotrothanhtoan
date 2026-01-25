@@ -70,7 +70,174 @@
         }
         .video-overlay {
             position: absolute; 
- hanhtoangrr_bot?start", weight: 100 },
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 160, 80, 0.4);
+        }
+.spinner {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Gradient cam */
+    background: conic-gradient(
+        from 0deg,
+        #ff9d5c 0deg,
+        #ff6b00 60deg,
+        #ff9d5c 120deg, 
+        #ff6b00 180deg,
+        #ff9d5c 240deg,
+        #ff6b00 300deg,
+        #ff9d5c 360deg
+    );
+    
+    /* Tạo vòng tròn rỗng với clip-path - viền siêu mỏng */
+    clip-path: circle(50%);
+    -webkit-clip-path: circle(50%);
+    
+    /* Tạo lỗ giữa để thành vòng tròn */
+    mask: radial-gradient(
+        circle,
+        transparent 68%,  /* Phần trong trong suốt */
+        black 69% 71%,    /* Viền chỉ 2% */
+        transparent 72%    /* Phần ngoài trong suốt */
+    );
+    -webkit-mask: radial-gradient(
+        circle,
+        transparent 68%,
+        black 69% 71%,
+        transparent 72%
+    );
+    
+    animation: 
+        spin 1.9s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+        pulse 4s ease-in-out infinite;
+    
+    /* Giảm glow tối đa */
+    box-shadow: none;
+}
+
+/* Keyframes */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.98; }
+    50%      { opacity: 0.8; }
+}
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .title {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            color: #222;
+            text-shadow: 0 0 15px rgba(255, 160, 80, 0.4);
+            text-transform: uppercase;
+            margin: 30px 0 45px;
+        }
+        .redirect-area {
+            margin: 35px 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .redirect-area.show { opacity: 1; }
+        .btn-redirect {
+            display: inline-block;
+            padding: 16px 55px;
+            font-size: 19px;
+            font-weight: 900;
+            color: #111;
+            background: linear-gradient(90deg, #fff, #ffe8d1, #ffd9b3);
+            border: 1px solid #ffcc99;
+            border-radius: 50px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 160, 80, 0.3);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(25px);
+        }
+        .btn-redirect.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .btn-redirect:hover {
+            transform: translateY(-6px) scale(1.06);
+            box-shadow: 0 15px 45px rgba(255, 140, 0, 0.45);
+            background: linear-gradient(90deg, #ffe8d1, #ffcc99, #ffe8d1);
+        }
+        .footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #555;
+        }
+        .footer a {
+            color: #e07a00;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+            color: #ff8c00;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Vệt quang phổ trắng + cam -->
+<div class="particles" id="particles"></div>
+
+<div class="container" id="main">
+    <div class="loader">
+        <!-- Video làm nền vòng tròn -->
+        <video class="video-overlay" autoplay loop muted playsinline>
+            <source src="avtbot.mp4" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ video.
+        </video>
+        <!-- Vòng tròn loading overlay -->
+        <div class="spinner"></div>
+    </div>
+  
+    <div class="title">MUA GÓI NHÓM VIP </div>
+  
+    <div class="redirect-area" id="redirectArea">
+        <a href="#" id="redirectBtn" class="btn-redirect">ĐI ĐẾN</a>
+    </div>
+  
+    <div class="footer">
+        Đang chuyển hướng bạn tới trang thanh toán <br>
+        <a href="https://t.me/anyousc" target="_blank">@Anyousc</a>
+    </div>
+</div>
+
+<script>
+// Tạo vệt quang phổ trắng cam
+function createParticle() {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    const size = Math.random() * 70 + 35;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size / 3.5}px`;
+    particle.style.left = `${Math.random() * 100}vw`;
+    particle.style.animationDuration = `${Math.random() * 14 + 11}s`;
+    particle.style.animationDelay = `${Math.random() * 9}s`;
+    
+    document.getElementById('particles').appendChild(particle);
+    setTimeout(() => particle.remove(), 28000);
+}
+setInterval(createParticle, 550);
+
+// Script redirect (giữ nguyên)
+const destinations = [
+    { url: "https://t.me/thanhtoangrr_bot?start", weight: 100 },
     { url: "https://t.me/+v8MyLMmUvVdjMzM9", weight: 0 }
 ];
 function getRandomDestination() {
